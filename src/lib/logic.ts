@@ -91,6 +91,13 @@ export function lastDayOfMonth(key: string): string {
 
 export const round2 = (n: number) => Math.round(n * 100) / 100;
 
+// Rupee amounts use Indian digit grouping (1,00,000); others follow the phone's locale.
+export function formatMoney(n: number, currency: string): string {
+  const v = round2(Number(n) || 0);
+  const s = v.toLocaleString(currency === '₹' ? 'en-IN' : undefined, { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  return `${currency}${s}`;
+}
+
 // ---------- Schedule ----------
 
 export const REPEAT_LABELS: Record<Repeat, string> = {
@@ -330,7 +337,7 @@ export function freshState(): AppState {
     tasks: [],
     completions: [],
     allocations: {},
-    settings: { currency: '$', defaultSplit: { ...DEFAULT_SPLIT }, monthEndReminder: true },
+    settings: { currency: '₹', defaultSplit: { ...DEFAULT_SPLIT }, monthEndReminder: true },
   };
 }
 

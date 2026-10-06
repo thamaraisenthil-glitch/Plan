@@ -1,10 +1,6 @@
-import { parseDate, round2 } from './logic';
+import { parseDate } from './logic';
 
-export function formatMoney(n: number, currency: string): string {
-  const v = round2(Number(n) || 0);
-  const s = v.toLocaleString(undefined, { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
-  return `${currency}${s}`;
-}
+export { formatMoney } from './logic';
 
 export function fmtDay(ds: string, opts: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' }): string {
   return parseDate(ds).toLocaleDateString(undefined, opts);

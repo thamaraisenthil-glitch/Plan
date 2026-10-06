@@ -4,7 +4,7 @@ import {
   occursOn, eventsOn, nextAlarm, planNotifications, addMonths, lastDayOfMonth,
   isTaskDone, monthCompletions, sumRewards, splitAmount, isValidSplit, rebalanceSplit,
   unsplitMonths, lifetimeTotals, normalizeState, freshState, MAX_PENDING,
-  type ScheduleEvent, type Completion,
+  formatMoney, type ScheduleEvent, type Completion,
 } from '../src/lib/logic.ts';
 
 const ev = (o: Partial<ScheduleEvent> = {}): ScheduleEvent => ({
@@ -137,4 +137,11 @@ test('normalizeState repairs bad input and accepts web-version backups', () => {
   assert.ok(isValidSplit(s.settings.defaultSplit));
   assert.equal(s.settings.monthEndReminder, true);
   assert.ok(!('fired' in s));
+});
+
+test('rupee is the default currency, with Indian digit grouping', () => {
+  assert.equal(freshState().settings.currency, '₹');
+  assert.equal(formatMoney(150000, '₹'), '₹1,50,000');
+  assert.equal(formatMoney(1234.5, '₹'), '₹1,234.50');
+  assert.equal(formatMoney(25, '₹'), '₹25');
 });
