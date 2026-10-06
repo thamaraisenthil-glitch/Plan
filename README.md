@@ -55,6 +55,10 @@ npx expo start
 
 and scan the QR code. Code changes appear on the phone instantly.
 
+## Publishing to the stores
+
+See [`store/LAUNCH.md`](store/LAUNCH.md) for the step-by-step guide. The listing text, privacy policy, screenshots and graphics are in `store/`.
+
 ## Project layout
 
 | Path | Purpose |

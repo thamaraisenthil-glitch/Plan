@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "bundleIdentifier": "com.tammie.tamplan",
-      "supportsTablet": true,
+      "supportsTablet": false,
       "entitlements": {
         "com.apple.developer.usernotifications.time-sensitive": true
       },
