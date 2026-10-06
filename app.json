@@ -20,8 +20,9 @@
     "android": {
       "package": "com.tammie.tamplan",
       "adaptiveIcon": {
-        "backgroundColor": "#4F46E5",
+        "backgroundColor": "#DC2626",
         "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "permissions": [
@@ -50,7 +51,7 @@
         "expo-notifications",
         {
           "icon": "./assets/notification-icon.png",
-          "color": "#4F46E5",
+          "color": "#DC2626",
           "defaultChannel": "alarms"
         }
       ],
@@ -58,10 +59,10 @@
         "expo-splash-screen",
         {
           "image": "./assets/splash-icon.png",
-          "imageWidth": 160,
-          "backgroundColor": "#F6F7FB",
+          "imageWidth": 180,
+          "backgroundColor": "#DC2626",
           "dark": {
-            "backgroundColor": "#0F1117"
+            "backgroundColor": "#991B1B"
           }
         }
       ],
