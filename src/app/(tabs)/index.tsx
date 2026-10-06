@@ -1,6 +1,6 @@
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Button, Card, Empty, Fab, IconButton, Ionicons, Screen } from '../../components/ui';
 import { fmtClock, fmtDay, fmtMonth, fmtTime, formatMoney } from '../../lib/format';
 import { addDays, eventsOn, monthCompletions, monthKey, nextAlarm, parseDate, REPEAT_LABELS, sumRewards, toDateStr, unsplitMonths } from '../../lib/logic';
@@ -55,7 +55,7 @@ export default function ScheduleScreen() {
         </Pressable>
       )}
 
-      {hasAlarms && perm !== null && perm !== 'granted' && (
+      {Platform.OS !== 'web' && hasAlarms && perm !== null && perm !== 'granted' && (
         <Card style={{ backgroundColor: c.dangerSoft, borderColor: c.dangerSoft, gap: 10, marginTop: 0, marginBottom: 10 }}>
           <Text style={{ color: c.text, fontWeight: '600' }}>
             {perm === 'denied' ? 'Notifications are turned off, so alarms can’t ring.' : 'Allow notifications so your alarms can ring.'}

@@ -100,14 +100,20 @@ export default function SettingsScreen() {
 
       <H2>Alarms & reminders</H2>
       <Card style={{ gap: 12, marginTop: 0 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={{ color: c.text, fontSize: 16 }}>Notifications</Text>
-          <Text style={{ color: perm === 'granted' ? c.good : c.danger, fontWeight: '700' }}>
-            {perm === 'granted' ? 'Allowed' : perm === 'denied' ? 'Blocked' : perm === 'undetermined' ? 'Not set' : perm}
-          </Text>
-        </View>
-        {perm !== 'granted' && <Button title={perm === 'denied' ? 'Open phone settings' : 'Allow notifications'} kind="primary" onPress={enable} />}
-        {perm === 'granted' && <Button title="Send a test alarm (5 s)" icon="alarm-outline" onPress={() => sendTestAlarm().then(() => toast('Test alarm in 5 seconds'))} />}
+        {Platform.OS === 'web' ? (
+          <Text style={{ color: c.muted }}>Alarms ring in the phone app. This browser preview can’t schedule them.</Text>
+        ) : (
+          <>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={{ color: c.text, fontSize: 16 }}>Notifications</Text>
+              <Text style={{ color: perm === 'granted' ? c.good : c.danger, fontWeight: '700' }}>
+                {perm === 'granted' ? 'Allowed' : perm === 'denied' ? 'Blocked' : perm === 'undetermined' ? 'Not set' : perm}
+              </Text>
+            </View>
+            {perm !== 'granted' && <Button title={perm === 'denied' ? 'Open phone settings' : 'Allow notifications'} kind="primary" onPress={enable} />}
+            {perm === 'granted' && <Button title="Send a test alarm (5 s)" icon="alarm-outline" onPress={() => sendTestAlarm().then(() => toast('Test alarm in 5 seconds'))} />}
+          </>
+        )}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
           <View style={{ flex: 1 }}>
             <Text style={{ color: c.text, fontSize: 16 }}>Month-end reminder</Text>
