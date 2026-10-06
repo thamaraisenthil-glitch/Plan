@@ -2,13 +2,13 @@
   <rect x="96" y="112" width="270" height="318" rx="30" fill="#FFFFFF"/>
   <rect x="139" y="88" width="22" height="50" rx="11" fill="#FECACA"/><rect x="205" y="88" width="22" height="50" rx="11" fill="#FECACA"/><rect x="271" y="88" width="22" height="50" rx="11" fill="#FECACA"/>
   
-  <g fill="none" stroke="#DC2626" stroke-width="24" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(282 150) scale(0.42) translate(-156 -178)" fill="none" stroke="#DC2626" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
     <path d="M156 178H280"/>
     <path d="M156 220H280"/>
     <path d="M178 178c68 0 68 86 0 86h-22"/>
     <path d="M164 264L248 338"/>
   </g>
-  <path d="M136 394H214" stroke="#DC2626" stroke-opacity=".28" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="140" cy="186" r="15" fill="#DC2626"/><path d="M176 186H252" stroke="#F3B4B4" stroke-width="20" stroke-linecap="round"/><circle cx="140" cy="254" r="15" fill="#DC2626"/><path d="M176 254H318" stroke="#F3B4B4" stroke-width="20" stroke-linecap="round"/><circle cx="140" cy="322" r="15" fill="#DC2626"/><path d="M176 322H250" stroke="#F3B4B4" stroke-width="20" stroke-linecap="round"/>
   <circle cx="368" cy="372" r="98" fill="#FFFFFF"/>
   <circle cx="368" cy="372" r="82" fill="#FBBF24"/>
   <g fill="#991B1B">
