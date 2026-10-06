@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Plan</title>
+  <meta name="description" content="Day schedules with alarms, tasks that earn rewards, and a monthly split into expenses, savings and investment.">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Plan">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Plan</h1>
+      <p class="sub" id="today-label"></p>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btn-notify" title="Enable alarm notifications" aria-label="Enable alarm notifications">🔔</button>
+      <button class="icon-btn" id="btn-settings" title="Settings" aria-label="Settings">⚙️</button>
+    </div>
+  </header>
+
+  <div id="banner"></div>
+
+  <main>
+    <!-- Schedule -->
+    <section id="view-schedule" class="view" data-view="schedule">
+      <div class="row between">
+        <button class="ghost" id="day-prev" aria-label="Previous week">‹</button>
+        <input type="date" id="day-picker" aria-label="Pick a day">
+        <button class="ghost" id="day-next" aria-label="Next week">›</button>
+      </div>
+      <div class="week" id="week-strip"></div>
+      <p class="hint" id="next-alarm"></p>
+      <ul class="list" id="event-list"></ul>
+      <button class="fab" id="add-event" aria-label="Add schedule item">＋</button>
+    </section>
+
+    <!-- Tasks -->
+    <section id="view-tasks" class="view" data-view="tasks" hidden>
+      <div class="cards">
+        <div class="card stat"><span class="label">Earned today</span><span class="value" id="stat-today"></span></div>
+        <div class="card stat"><span class="label">This month</span><span class="value" id="stat-month"></span></div>
+      </div>
+      <div class="seg" role="tablist">
+        <button class="seg-btn active" data-filter="active">To do</button>
+        <button class="seg-btn" data-filter="done">Done</button>
+        <button class="seg-btn" data-filter="all">All</button>
+      </div>
+      <ul class="list" id="task-list"></ul>
+      <button class="fab" id="add-task" aria-label="Add task">＋</button>
+    </section>
+
+    <!-- Rewards -->
+    <section id="view-rewards" class="view" data-view="rewards" hidden>
+      <div class="row between">
+        <button class="ghost" id="month-prev" aria-label="Previous month">‹</button>
+        <h2 id="month-label"></h2>
+        <button class="ghost" id="month-next" aria-label="Next month">›</button>
+      </div>
+
+      <div class="card hero">
+        <span class="label">Total rewards earned</span>
+        <span class="big" id="month-total"></span>
+        <span class="hint" id="month-status"></span>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <h3>Split this month</h3>
+          <button class="ghost small" id="split-reset">Use default</button>
+        </div>
+        <div id="split-rows"></div>
+        <p class="error" id="split-error"></p>
+        <button class="primary block" id="split-save">Save split</button>
+      </div>
+
+      <h3>Lifetime</h3>
+      <div class="cards three" id="lifetime"></div>
+
+      <h3>Earned this month</h3>
+      <ul class="list compact" id="month-completions"></ul>
+
+      <h3>History</h3>
+      <div class="table-wrap"><table id="history"></table></div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="schedule"><span>🗓️</span>Schedule</button>
+    <button class="tab" data-tab="tasks"><span>✅</span>Tasks</button>
+    <button class="tab" data-tab="rewards"><span>💰</span>Rewards</button>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Event dialog -->
+  <dialog id="event-dialog">
+    <form method="dialog" id="event-form">
+      <h2 id="event-dialog-title">New schedule item</h2>
+      <label>Title<input name="title" required maxlength="120" placeholder="e.g. Morning walk"></label>
+      <div class="grid2">
+        <label>Date<input type="date" name="date" required></label>
+        <label>Time<input type="time" name="time" required></label>
+      </div>
+      <div class="grid2">
+        <label>Repeat
+          <select name="repeat">
+            <option value="none">Once</option>
+            <option value="daily">Every day</option>
+            <option value="weekdays">Weekdays</option>
+            <option value="weekly">Every week</option>
+          </select>
+        </label>
+        <label>Duration (min)<input type="number" name="duration" min="5" step="5" value="30"></label>
+      </div>
+      <label class="check"><input type="checkbox" name="alarm" checked> Alarm</label>
+      <label>Ring
+        <select name="alarmOffset">
+          <option value="0">At start time</option>
+          <option value="5">5 min before</option>
+          <option value="10">10 min before</option>
+          <option value="15">15 min before</option>
+          <option value="30">30 min before</option>
+          <option value="60">1 hour before</option>
+        </select>
+      </label>
+      <label>Notes<textarea name="notes" rows="2" maxlength="500"></textarea></label>
+      <div class="dialog-actions">
+        <button type="button" class="danger" id="event-delete">Delete</button>
+        <button type="button" class="ghost" id="event-ics" title="Download a calendar file so your phone's calendar rings this alarm even when the app is closed">📅 Add to calendar</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" value="cancel" data-close>Cancel</button>
+        <button type="submit" class="primary" value="save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Task dialog -->
+  <dialog id="task-dialog">
+    <form method="dialog" id="task-form">
+      <h2 id="task-dialog-title">New task</h2>
+      <label>Task<input name="title" required maxlength="120" placeholder="e.g. Clean the room"></label>
+      <div class="grid2">
+        <label>Reward<input type="number" name="reward" min="0" step="0.01" required value="10"></label>
+        <label>Due date<input type="date" name="due"></label>
+      </div>
+      <label>Repeat
+        <select name="repeat">
+          <option value="none">One-time</option>
+          <option value="daily">Daily (earn every day)</option>
+        </select>
+      </label>
+      <div class="dialog-actions">
+        <button type="button" class="danger" id="task-delete">Delete</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" data-close>Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Settings dialog -->
+  <dialog id="settings-dialog">
+    <form method="dialog" id="settings-form">
+      <h2>Settings</h2>
+      <label>Currency symbol<input name="currency" maxlength="4"></label>
+      <fieldset>
+        <legend>Default monthly split (%)</legend>
+        <div class="grid3">
+          <label>Expenses<input type="number" name="expenses" min="0" max="100" step="1"></label>
+          <label>Savings<input type="number" name="savings" min="0" max="100" step="1"></label>
+          <label>Investment<input type="number" name="investment" min="0" max="100" step="1"></label>
+        </div>
+        <p class="error" id="settings-error"></p>
+      </fieldset>
+      <fieldset>
+        <legend>Backup</legend>
+        <div class="row wrap">
+          <button type="button" class="ghost" id="export-data">Export</button>
+          <label class="ghost file-btn">Import<input type="file" id="import-data" accept="application/json" hidden></label>
+          <button type="button" class="danger" id="clear-data">Erase all</button>
+        </div>
+        <p class="hint">Data is stored only on this device.</p>
+      </fieldset>
+      <div class="dialog-actions">
+        <span class="spacer"></span>
+        <button type="button" class="ghost" data-close>Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Ringing alarm -->
+  <dialog id="alarm-dialog" class="alarm">
+    <div class="alarm-body">
+      <div class="bell">⏰</div>
+      <h2 id="alarm-title"></h2>
+      <p id="alarm-time"></p>
+      <div class="dialog-actions center">
+        <button class="ghost" id="alarm-snooze">Snooze 5 min</button>
+        <button class="primary" id="alarm-dismiss">Dismiss</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
