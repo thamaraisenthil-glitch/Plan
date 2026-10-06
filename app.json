@@ -1,0 +1,71 @@
+{
+  "expo": {
+    "name": "Plan",
+    "slug": "plan",
+    "scheme": "plan",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.thamaraisenthil.plan",
+      "supportsTablet": true,
+      "entitlements": {
+        "com.apple.developer.usernotifications.time-sensitive": true
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.thamaraisenthil.plan",
+      "adaptiveIcon": {
+        "backgroundColor": "#4F46E5",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.USE_EXACT_ALARM",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.VIBRATE"
+      ],
+      "predictiveBackGestureEnabled": false,
+      "blockedPermissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "@react-native-community/datetimepicker",
+      "expo-sharing",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#4F46E5",
+          "defaultChannel": "alarms"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#F6F7FB",
+          "dark": {
+            "backgroundColor": "#0F1117"
+          }
+        }
+      ],
+      "expo-font"
+    ]
+  }
+}
