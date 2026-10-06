@@ -1,4 +1,4 @@
-# Plan — Schedule, Tasks & Rewards
+# Tamplan — Schedule, Tasks & Rewards
 
 An iPhone and Android app built with [Expo](https://expo.dev) (React Native), from a single codebase.
 
@@ -14,7 +14,7 @@ Alarms are scheduled with the phone's own notification system (`expo-notificatio
 
 - Repeating items use the operating system's own daily or weekly triggers, so they keep ringing even if you never open the app again.
 - One-time items, and repeating items whose start date is more than a cycle away, are scheduled for exact dates. These are topped up automatically each time you open the app.
-- **iPhone**: alarms are marked *Time Sensitive*, so they break through Focus modes. iOS limits an app to 64 pending alarms, and Plan keeps the 60 soonest. Unlike the built-in Clock app, a third-party app can't play a sound that loops until you stop it; you get a notification with sound.
+- **iPhone**: alarms are marked *Time Sensitive*, so they break through Focus modes. iOS limits an app to 64 pending alarms, and Tamplan keeps the 60 soonest. Unlike the built-in Clock app, a third-party app can't play a sound that loops until you stop it; you get a notification with sound.
 - **Android**: alarms use a dedicated "Alarms" channel with alarm audio, vibration and *exact* timing (`USE_EXACT_ALARM`).
 
 To check that alarms work on a phone, go to **Settings → Send a test alarm**.
@@ -74,4 +74,4 @@ npm run typecheck
 npm run lint
 ```
 
-The app ID is `com.thamaraisenthil.plan` for both iOS and Android, set in `app.json`. Change it before the first store submission if you want a different one. The `web` target is only used for quick previews, and alarms are disabled there.
+The app ID is `com.thamaraisenthil.tamplan` for both iOS and Android, set in `app.json`. Change it before the first store submission if you want a different one. The `web` target is only used for quick previews, and alarms are disabled there.

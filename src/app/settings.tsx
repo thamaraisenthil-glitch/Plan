@@ -48,11 +48,11 @@ export default function SettingsScreen() {
     try {
       const json = JSON.stringify(state, null, 2);
       if (Platform.OS === 'web') return toast('Backups are available in the phone app');
-      const file = new File(Paths.cache, `plan-backup-${today}.json`);
+      const file = new File(Paths.cache, `tamplan-backup-${today}.json`);
       if (file.exists) file.delete();
       file.create();
       file.write(json);
-      await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Save your Plan backup', UTI: 'public.json' });
+      await Sharing.shareAsync(file.uri, { mimeType: 'application/json', dialogTitle: 'Save your Tamplan backup', UTI: 'public.json' });
     } catch (e) {
       Alert.alert('Export failed', String(e));
     }
@@ -70,7 +70,7 @@ export default function SettingsScreen() {
         router.back();
       });
     } catch {
-      Alert.alert('Import failed', 'That file is not a valid Plan backup.');
+      Alert.alert('Import failed', 'That file is not a valid Tamplan backup.');
     }
   };
 

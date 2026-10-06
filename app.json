@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Plan",
-    "slug": "plan",
-    "scheme": "plan",
+    "name": "Tamplan",
+    "slug": "tamplan",
+    "scheme": "tamplan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "bundleIdentifier": "com.thamaraisenthil.plan",
+      "bundleIdentifier": "com.thamaraisenthil.tamplan",
       "supportsTablet": true,
       "entitlements": {
         "com.apple.developer.usernotifications.time-sensitive": true
@@ -18,7 +18,7 @@
       }
     },
     "android": {
-      "package": "com.thamaraisenthil.plan",
+      "package": "com.thamaraisenthil.tamplan",
       "adaptiveIcon": {
         "backgroundColor": "#4F46E5",
         "foregroundImage": "./assets/android-icon-foreground.png",
