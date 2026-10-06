@@ -74,4 +74,4 @@ npm run typecheck
 npm run lint
 ```
 
-The app ID is `com.thamaraisenthil.tamplan` for both iOS and Android, set in `app.json`. Change it before the first store submission if you want a different one. The `web` target is only used for quick previews, and alarms are disabled there.
+The app ID is `com.tammie.tamplan` for both iOS and Android, set in `app.json`. Change it before the first store submission if you want a different one. The `web` target is only used for quick previews, and alarms are disabled there.

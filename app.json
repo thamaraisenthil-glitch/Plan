@@ -8,7 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "bundleIdentifier": "com.thamaraisenthil.tamplan",
+      "bundleIdentifier": "com.tammie.tamplan",
       "supportsTablet": true,
       "entitlements": {
         "com.apple.developer.usernotifications.time-sensitive": true
@@ -18,7 +18,7 @@
       }
     },
     "android": {
-      "package": "com.thamaraisenthil.tamplan",
+      "package": "com.tammie.tamplan",
       "adaptiveIcon": {
         "backgroundColor": "#4F46E5",
         "foregroundImage": "./assets/android-icon-foreground.png",
